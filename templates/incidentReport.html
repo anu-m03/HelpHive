@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crisis Form</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-
-<!-- Flash Messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-    <ul>
-    {% for streetAddress, message in messages %}
-        <li class="{{ streetAddress }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-{% endwith %}
-
 <body>
-    <h2>Report an Incident</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+        {% for streetAddress, message in messages %}
+            <li class="{{ streetAddress }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
 
+    <h2>Report an Incident</h2>
     <form method="POST">
         {{ form.hidden_tag() }}
         <div>
@@ -29,13 +28,13 @@
         <div>
             {{ form.resources.label }}
             {% for subfield in form.resources %}
-                <label>{{ subfield }} {{subfield.label}}</label>
+                <label>{{ subfield }} {{ subfield.label }}</label>
             {% endfor %}
         </div>
         <div>
             {{ form.severity.label }}
             {% for subfield in form.severity %}
-                <label>{{ subfield }} {{subfield.label}}</label>
+                <label>{{ subfield }} {{ subfield.label }}</label>
             {% endfor %}
         </div>
         <div>
@@ -46,6 +45,6 @@
             <button type="submit">Report</button>
         </div>
     </form>
-    <a href="{{ url_for('dashboard' )}}">Dashboard</a>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
 </body>
 </html>

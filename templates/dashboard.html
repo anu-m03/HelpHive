@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <ul>
+                <li><a href="{{ url_for('incidentReport') }}">Report Incident</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('index') }}">Logout</a></li>
+            </ul>
+        </nav>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <ul>
-        {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Help Hive Logo" class="logo">
+                <h1>Welcome, {{ loggedInUser }}!</h1>
+            </header>
+            <section class="map-section">
+                <div class="map-container">
+                    <p>Map from Leaflet</p>
+                </div>
+            </section>
+            <button class="report-button">Report an Incident</button>
+        </main>
+    </div>
 
-    <h1>Welcome to your dashboard!</h1>
-    <p>Here is your personal information.</p>
-    <a href="{{ url_for('incidentReport' )}}">Report an Incident</a>
-    <br>
-    <a href="{{ url_for('profile') }}">Profile Page</a>
-    <br>
-    <a href="{{ url_for('index') }}">Logout</a>
+    <script>
+        // Sidebar Toggle for Small Screens
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
