@@ -1,3 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}My Reports{% endblock %}
+
+{% block content %}
+    <h2>My Reports</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.report.label }}
+            {{ form.report() }}
+        </div>
+        <div>
+            <button type="submit">Delete Report</button>
+        </div>
+    </form>
+{% endblock %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
